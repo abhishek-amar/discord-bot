@@ -1,11 +1,10 @@
 import discord
 from discord.ext import commands
 
-class AdministrationCommands(commands.Cog, command_attrs = dict(case_insensitive = True)):
+class AdministrationCommands(commands.Cog, name = 'admin'):
     
     def __init__(self, bot):
         self.bot = bot
-        
 
     @commands.command(aliases = ['purge'])
     @commands.has_permissions(kick_members=True)

@@ -8,30 +8,33 @@ class CommandEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         print(f'{ctx.command} was invoked incorrectly by {ctx.author.name}#{ctx.author.discriminator}')
-        error = getattr(error, "original", error)
+        # error = getattr(error, "original", error)
         # print(error)
         if isinstance(error, commands.MissingPermissions):
-            await ctx.send(f"{ctx.author.mention} You do not have enough permissions.")
+            await ctx.channel.send(f"{ctx.author.mention} You do not have enough permissions.")
 
         elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"You must provide all required arguments for said command.")
+            await ctx.channel.send(f"You must provide all required arguments for said command.")
 
         elif isinstance(error, commands.CommandNotFound):
-            await ctx.send(f"Command not found")
+            await ctx.channel.send(f"Command not found")
 
         elif isinstance(error, commands.UserInputError):
-            await ctx.send(f"Erroneous input")
+            await ctx.channel.send(f"Erroneous input")
 
         elif isinstance(error, commands.MissingAnyRole):
             roles_needed = error.missing_roles
             roles_needed = ', '.join(roles_needed)
-            await ctx.send(f"You do not have the following role(s) required to run this command: {roles_needed}")
+            await ctx.channel.send(f"You do not have the following role(s) required to run this command: {roles_needed}")
 
         elif isinstance(error, commands.errors.MissingPermissions):
             await ctx.channel.send(f"Bot doesn't have enough permissions")
 
         elif isinstance(error, commands.errors.NoPrivateMessage):
-            await ctx.send("This command can't be used in a DM")
+            await ctx.channel.send("This command can't be used in a DM")
+        
+        elif isinstance(error, commands.errors.CommandInvokeError):
+            await ctx.channel.send("Command not found")
 
     @commands.Cog.listener()
     async def on_command_completion(self, ctx):

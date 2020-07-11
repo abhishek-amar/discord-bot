@@ -1,12 +1,12 @@
 import discord
 from discord.ext import commands
 
-class MemberCommands(commands.Cog, command_attrs = dict(case_insensitive = True)):
+class MemberCommands(commands.Cog, name = 'membercommands'):
     
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(name = 'assignrole', aliases = ['addrole'])
+    @commands.command(name = 'assignrole', aliases = ['addrole'], brief = 'Assigns a role', usage = '<member> <add_role>')
     @commands.has_permissions(kick_members=True)
     async def add_role_command(self, ctx, role: discord.Role, member: discord.Member):
         await member.add_roles(role)
