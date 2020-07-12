@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class AdministrationCommands(commands.Cog, name = 'admin'):
+class AdministrationCommands(commands.Cog, name = 'admincmds'):
     
     def __init__(self, bot):
         self.bot = bot

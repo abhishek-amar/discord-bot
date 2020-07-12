@@ -1,6 +1,6 @@
 from discord.ext import commands
 
-class OwnerCog(commands.Cog, command_attrs = dict(hidden = True), name = 'owner'):
+class OwnerCog(commands.Cog, command_attrs = dict(hidden = True), name = 'ownercmds'):
     
     def __init__(self, bot):
         self.bot = bot
