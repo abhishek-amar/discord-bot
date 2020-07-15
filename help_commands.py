@@ -43,7 +43,7 @@ class HelpCog(commands.Cog, name = 'helpcmds'):
                 command_names_str = '\n'.join(command_names)
                 embed2 = discord.Embed(
                 title = 'Help',
-                description = f'Help for a category of commands',
+                description = 'Help for a category of commands',
                 colour = discord.Colour.blue()
                 )
                 embed2.set_author(name = f"{self.bot.user.name}#{self.bot.user.discriminator}", icon_url=str(self.bot.user.avatar_url))
