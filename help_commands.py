@@ -16,10 +16,9 @@ class HelpCog(commands.Cog, name = 'helpcmds'):
                 if 'cmds' in x:
                     cog_names.append(x.lower())
                     cog_names_newline = '\n'.join(cog_names)
-        today_date = dt.date.today()
-        string_date = today_date.strftime("%A, %B %d, %Y")
-        now_time = dt.datetime.now()
-        string_time = now_time.strftime("%H:%M:%S")
+        
+        now_date_time = dt.datetime.now(dt.timezone.utc)
+        string_date_time = now_date_time.strftime("%A, %B %d, %Y\n%H:%M:%S")
         command_invoked_by = f'Invoked by {ctx.author.name}#{ctx.author.discriminator}'
        
         if arg == None:
@@ -31,7 +30,7 @@ class HelpCog(commands.Cog, name = 'helpcmds'):
             # self.bot.user returns a ClientUser which has the avatar_url method
             embed1.set_author(name = f"{self.bot.user.name}#{self.bot.user.discriminator}", icon_url=str(self.bot.user.avatar_url))
             embed1.add_field(name = "List of command types: ", value = cog_names_newline)
-            embed1.set_footer(text = f'{command_invoked_by}\n{string_date}\n{string_time}')
+            embed1.set_footer(text = f'{command_invoked_by}\n{string_date_time}')
             await ctx.channel.send(embed = embed1)
 
         else:
@@ -48,7 +47,7 @@ class HelpCog(commands.Cog, name = 'helpcmds'):
                 )
                 embed2.set_author(name = f"{self.bot.user.name}#{self.bot.user.discriminator}", icon_url=str(self.bot.user.avatar_url))
                 embed2.add_field(name = f"List of commands under {arg}: ", value = command_names_str)
-                embed2.set_footer(text = f'{command_invoked_by}\n{string_date}\n{string_time}')
+                embed2.set_footer(text = f'{command_invoked_by}\n{string_date_time}')
                 await ctx.channel.send(embed = embed2)
             
 
@@ -66,7 +65,7 @@ class HelpCog(commands.Cog, name = 'helpcmds'):
                 embed3.add_field(name = "Aliases:", value = f"`{string_of_names}`", inline = False)
                 embed3.add_field(name = "Brief description:", value = some_command.brief, inline = False)
                 embed3.add_field(name = "Usage:", value = f"`.[{string_of_names}] {some_command.usage}`", inline = False)
-                embed3.set_footer(text = f'{command_invoked_by}\n{string_date}\n{string_time}')
+                embed3.set_footer(text = f'{command_invoked_by}\n{string_date_time}')
                 await ctx.channel.send(embed = embed3)
     
 

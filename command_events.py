@@ -14,7 +14,7 @@ class CommandEvents(commands.Cog):
             await ctx.channel.send(f"{ctx.author.mention} You do not have enough permissions.")
 
         elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.channel.send(f"You must provide all required arguments for said command.")
+            await ctx.channel.send(f"You must provide all required arguments for said command.\nUse the `.help` command for more info")
 
         elif isinstance(error, commands.CommandNotFound):
             await ctx.channel.send(f"Command not found")
@@ -35,6 +35,9 @@ class CommandEvents(commands.Cog):
         
         elif isinstance(error, commands.errors.CommandInvokeError):
             await ctx.channel.send("Command not found")
+        
+        else:
+            raise error
 
     @commands.Cog.listener()
     async def on_command_completion(self, ctx):

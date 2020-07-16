@@ -29,21 +29,20 @@ class MemberEvents(commands.Cog):
         # Boolean value of an empty string is False
         if not before.content or not after.content:
             return
-        today_date = dt.date.today()
-        string_date = today_date.strftime("%A, %B %d, %Y")
-        now_time = dt.datetime.now()
-        string_time = now_time.strftime("%H:%M:%S")
+
+        string_date_time = after.edited_at.strftime("%A, %B %d, %Y\n%H:%M:%S")
         embed4 = discord.Embed(
                 title = 'Message Edit',
                 colour = discord.Colour.blue()
                 )
         embed4.set_author(
-            name = f"{before.author.name}#{before.author.discriminator}\n({before.author.id})",icon_url=str(before.author.avatar_url)
+            name = f"{before.author.name}#{before.author.discriminator}\n({before.author.id})",
+            icon_url=str(before.author.avatar_url)
         )
         embed4.add_field(name = "Channel:", value = f"{before.channel.mention}\n({before.channel.id})", inline = False)
         embed4.add_field(name = "Before:", value = before.content, inline = False)
         embed4.add_field(name = "After:", value = after.content, inline = False)
-        embed4.set_footer(text = f'Message ID: {before.id}\n{string_date}\n{string_time}')
+        embed4.set_footer(text = f'Message ID: {before.id}\n{string_date_time}')
         await self.log_channel.send(embed = embed4)
     
 
